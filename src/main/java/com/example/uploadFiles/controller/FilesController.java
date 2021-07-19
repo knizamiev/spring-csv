@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 
 @Controller
-//@CrossOrigin("http://localhost:8082")
 public class FilesController {
 
     @Autowired
@@ -30,7 +29,10 @@ public class FilesController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file,
+                                                      @RequestParam("topic") String topic) {
+        System.out.println("topic " + topic);
+
         String message = "";
         try {
             storageService.save(file);
